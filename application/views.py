@@ -160,7 +160,7 @@ def tool"""+f"""{index}"""+f"""(query: str) -> str:
                 chunk_overlap=100,
                 embedding_model="mistral-embed",
                 vectordb_dir=here(f"vectordbs/{file['fileName']}"),
-                collection_name=f"{file["fileName"]}-chroma",
+                collection_name=f"{file['fileName']}-chroma",
                 doc_name=file["fileName"]
             )
             preparedb_instance.run()
