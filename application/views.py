@@ -281,7 +281,9 @@ def get_response():
         resp.status_code = 400 
         return resp
 
-    config = {"configurable": {"thread_id": 1}}
+    if "thread_id" not in session:
+        session["thread_id"] = uuid.uuid4()
+    config = {"configurable": {"thread_id": session["thread_id"]}}
     final_graph = final_graphs[session["graph_id"]]
     events = final_graph.stream(
             {"messages": [("user", message)]}, config, stream_mode="values"
