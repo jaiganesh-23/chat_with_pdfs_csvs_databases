@@ -196,14 +196,14 @@ def tool"""+f"""{index}"""+f"""(query: str) -> str:
                 db_path = here(f"downloads/csvs xlsxs dbs/{filename_without_extension}.db")
                 sqlite_db_path = f"sqlite:///{db_path}"
                 engine = create_engine(sqlite_db_path)
-                df = pd.read_csv(here(f"downloads/csvs xlsxs/{file["fileName"]}"))
+                df = pd.read_csv(here(f"downloads/csvs xlsxs/{file['fileName']}"))
                 df.to_sql(filename_without_extension, engine, if_exists="replace", index=False)
 
             if file_extension == "xlsx":
                 db_path = here(f"downloads/csvs xlsxs dbs/{filename_without_extension}.db")
                 sqlite_db_path = f"sqlite:///{db_path}"
                 engine = create_engine(sqlite_db_path)
-                df = pd.read_excel(here(f"downloads/csvs xlsxs/{file["fileName"]}"))
+                df = pd.read_excel(here(f"downloads/csvs xlsxs/{file['fileName']}"))
                 df.to_sql(filename_without_extension, engine, if_exists="replace", index=False)
 
             func_string = """
