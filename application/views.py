@@ -178,7 +178,7 @@ def tool"""+f"""{index}"""+f"""(query: str) -> str:
         embedding_model="mistral-embed",
         vectordb_dir=here(f"vectordbs/{file["fileName"]}"),
         k=2,
-        collection_name=f"{file["fileName"]}-chroma"
+        collection_name=f"{file['fileName']}-chroma"
     )
     docs = rag_tool.vectordb.similarity_search(query, k=2)
     return "".join([doc.page_content for doc in docs])
