@@ -142,7 +142,7 @@ from pyprojroot import here
 question="question"
 @tool
 def tool"""+f"""{index}"""+f"""(query: str) -> str:
-    'Query the {file["fileName"]} database. {file["fileDescription"]}. Input should be search query in natural language.'
+    "Query the {file["fileName"]} database. {file["fileDescription"]}. Input should be search query in natural language."
     agent = InitSQLTool(
             sqldb_dir=here(f"downloads/dbs/{file["fileName"]}")
         )
@@ -173,7 +173,7 @@ from pyprojroot import here
 
 @tool
 def tool"""+f"""{index}"""+f"""(query: str) -> str:
-    'Query the {file["fileName"]} file. {file["fileDescription"]}'
+    "Query the {file["fileName"]} file. {file["fileDescription"]}"
     rag_tool = InitRAGTool(
         embedding_model="mistral-embed",
         vectordb_dir=here(f"vectordbs/{file["fileName"]}"),
@@ -214,7 +214,7 @@ from pyprojroot import here
 question="question"
 @tool
 def tool"""+f"""{index}"""+f"""(query: str) -> str:
-    'Query the {filename_without_extension} database. {file["fileDescription"]}. Input should be search query in natural language.'
+    "Query the {filename_without_extension} database. {file["fileDescription"]}. Input should be search query in natural language."
     agent = InitSQLTool(sqldb_dir=here(f"downloads/csvs xlsxs dbs/{filename_without_extension}.db"))
     sql_query = agent.sql_query_chain.invoke({"{question: query}"})
     return agent.db.run(sql_query)
