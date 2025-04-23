@@ -18,4 +18,4 @@ if __name__ == "__main__":
     os.environ["GROQ_API_KEY"] = os.getenv("GROQ_API_KEY")
     os.environ["MISTRAL_API_KEY"] = os.getenv("MISTRALAI_API_KEY")
 
-    app.run(debug=True, host="127.0.0.1", port=5000)
+    app.run(debug=True, host="0.0.0.0", port=5000)
