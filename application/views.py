@@ -22,6 +22,7 @@ import uuid
 view = Blueprint("views", __name__)
 final_graphs = {}
 final_graphs_last_active = {}
+thread_id = 999
 
 def clear_final_graphs():
     global final_graphs
@@ -122,6 +123,8 @@ def get_files():
 def prepare_chatbot():
     global final_graphs
     global final_graphs_last_active
+    global thread_id
+    thread_id = thread_id + 1
     agent_tools = []
 
     clear_final_graphs()
@@ -265,6 +268,7 @@ def tool"""+f"""{index}"""+f"""(query: str) -> str:
 def get_response():
     global final_graphs
     global final_graphs_last_active
+    global thread_id
     message = request.get_json().get("message")
     if "message" not in session:
         session["message"] = [{"role": "user", "message": message}]
@@ -283,7 +287,7 @@ def get_response():
 
     if "thread_id" not in session:
         session["thread_id"] = uuid.uuid4()
-    config = {"configurable": {"thread_id": session["thread_id"]}}
+    config = {"configurable": {"thread_id": thread_id}}
     final_graph = final_graphs[session["graph_id"]]
     events = final_graph.stream(
             {"messages": [("user", message)]}, config, stream_mode="values"
