@@ -61,6 +61,9 @@ send_button.addEventListener("click", async function (e) {
     user_input.value = "";
 
     if(message){
+        let loading_div = document.querySelector(".load");
+        loading_div.style.display = "block";
+
         let message_div = document.createElement("div");
         message_div.classList.add("msg");
         let message_string = message;
@@ -79,6 +82,7 @@ send_button.addEventListener("click", async function (e) {
             body: JSON.stringify({ "message": message })
         })
         response = await response.json();
+        loading_div.style.display = "none";
 
         let bot_message_div = document.createElement("div");
         bot_message_div.classList.add("msg", "right");
