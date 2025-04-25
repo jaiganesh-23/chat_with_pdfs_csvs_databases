@@ -46,9 +46,15 @@
                 {% endif %}
             </div>
         {% endif %}
-        <div class="content">
-            {% block content %}{% endblock %}
-        </div>
+        {% if "sidebar" not in session or session["sidebar"] == False %}
+            <div class="content">
+                {% block content %}{% endblock %}
+            </div>
+        {% else %}
+            <div class="content open">
+                {% block content_open %}{% endblock %}
+            </div>
+        {% endif %}
     </div>
 
     {% block content_end %}{% endblock %}

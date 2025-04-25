@@ -2,7 +2,10 @@
 let menu_icon = document.querySelector(".menu-icon");
 menu_icon.addEventListener("click", async function () {
     let sidebar = document.querySelector(".sidebar");
+    let content = document.querySelector(".content");
     sidebar.classList.toggle("open");
+    console.log(content);
+    content.classList.toggle("open");
     menu_icon.classList.toggle('bx-menu');
     menu_icon.classList.toggle('bx-x');
     await fetch("/toggle_sidebar", {

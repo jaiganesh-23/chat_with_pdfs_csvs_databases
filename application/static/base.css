@@ -43,7 +43,6 @@ a:hover{
 .main-container{
     display: flex;
     flex-direction: row;
-    justify-content: center;
     height: 100%;
 }
 
@@ -73,7 +72,7 @@ a:hover{
 
 .sidebar.open a{
     font-size: 30px;
-    transition: font-size 0.5s ease;
+    transition: all 0.5s ease;
 }
 
 .sidebar a.active{
@@ -93,8 +92,39 @@ a:hover{
     width: calc(100% - 100px);
 }
 
-.sidebar.open .content{
+.content.open{
     width: calc(100% - 200px);
-    transition: width 0.5s ease;
+    transition: all 0.5s ease;
 }
 
+
+@media(max-width:1200px){
+    .navbar-top{
+        font-size: 1.5rem;
+        padding: 1rem;
+    }
+    .menu-icon{
+        font-size: 1.5rem;
+        padding: 0.75rem;
+    }
+    .sidebar{
+        width: 3rem;
+    }
+    .sidebar.open{
+        width: 5rem;
+    }
+    .sidebar a{
+        font-size: 1.5rem;
+        padding: 1rem;
+    }
+    .sidebar.open a{
+        font-size: 1rem;
+    }
+    .content{
+        width: calc(100% - 3rem);
+    }
+    .content.open{
+        width: calc(100% - 5rem);
+        transition: all 0.5s ease;
+    }
+}

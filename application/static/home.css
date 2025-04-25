@@ -297,12 +297,6 @@
     cursor: pointer;
 }
 
-.chatbot-message-div{
-    text-align: center;
-    margin: 20px;
-    font-size: 40px;
-}
-
 #overlay {
     display: none;
     position: fixed;
@@ -374,4 +368,382 @@
 
 .popup-button:hover{
     cursor: pointer;
+}
+
+@media(max-width:1200px){
+    .heading{
+        font-size: 1.2rem;
+        padding: 1rem;
+        margin: 1rem;
+    }
+    .pdfs{
+        padding: 1rem;
+    }
+    .pdfs-header{
+        font-size: 1rem;
+    }
+    .pdf-upload{
+        margin: 1rem;
+        padding: 1rem;
+        border-radius: 1rem;
+        width: 95%;
+    }
+    .pdf-upload-icon{
+        font-size: 5rem;
+    }
+    #pdf-description{
+        margin-bottom: 1rem;
+        border-radius: 1rem;
+        font-size: 0.7rem;
+        padding: 1rem;
+    }
+    #upload-pdf{
+        font-size: 1rem;
+        padding: 1rem;
+        border-radius: 1rem;
+    }
+    .pdf-selected-files{
+        margin: 1rem;
+        font-size: 1rem;
+    }
+    .pdfs-list-header{
+        font-size: 1rem;
+    }
+    .pdfs-list{
+        margin: 1rem;
+    }
+    .pdf{
+        width: 40%;
+        font-size: 0.8rem;
+        margin: 1rem;
+        padding: 1rem;
+        border-radius: 1rem;
+    }
+    .pdf i{
+        font-size: 5rem;
+    }
+    .no-pdf-files{
+        font-size: 1rem;
+        margin: 1rem;
+    }
+
+    .csvs{
+        padding: 1rem;
+    }
+    .csvs-header{
+        font-size: 1rem;
+    }
+    .csv-upload{
+        margin: 1rem;
+        padding: 1rem;
+        border-radius: 1rem;
+        width: 95%;
+    }
+    .csv-upload-icon{
+        font-size: 5rem;
+    }
+    #csv-description{
+        margin-bottom: 1rem;
+        border-radius: 1rem;
+        font-size: 0.7rem;
+        padding: 1rem;
+    }
+    #upload-csv{
+        font-size: 1rem;
+        padding: 1rem;
+        border-radius: 1rem;
+    }
+    .csv-selected-files{
+        margin: 1rem;
+        font-size: 1rem;
+    }
+    .csvs-list-header{
+        font-size: 1rem;
+    }
+    .csvs-list{
+        margin: 1rem;
+    }
+    .csv{
+        width: 40%;
+        font-size: 0.8rem;
+        margin: 1rem;
+        padding: 1rem;
+        border-radius: 1rem;
+    }
+    .csv i{
+        font-size: 5rem;
+    }
+    .no-csv-files{
+        font-size: 1rem;
+        margin: 1rem;
+    }
+
+    .dbs{
+        padding: 1rem;
+    }
+    .dbs-header{
+        font-size: 1rem;
+    }
+    .db-upload{
+        margin: 1rem;
+        padding: 1rem;
+        border-radius: 1rem;
+        width: 95%;
+    }
+    .db-upload-icon{
+        font-size: 5rem;
+    }
+    #db-description{
+        margin-bottom: 1rem;
+        border-radius: 1rem;
+        font-size: 0.7rem;
+        padding: 1rem;
+    }
+    #upload-db{
+        font-size: 1rem;
+        padding: 1rem;
+        border-radius: 1rem;
+    }
+    .db-selected-files{
+        margin: 1rem;
+        font-size: 1rem;
+    }
+    .dbs-list-header{
+        font-size: 1rem;
+    }
+    .dbs-list{
+        margin: 1rem;
+    }
+    .db{
+        width: 40%;
+        font-size: 0.8rem;
+        margin: 1rem;
+        padding: 1rem;
+        border-radius: 1rem;
+    }
+    .db i{
+        font-size: 5rem;
+    }
+    .no-db-files{
+        font-size: 1rem;
+        margin: 1rem;
+    }
+
+    .loader {
+        border: 1rem solid #f3f3f3;
+        border-radius: 50%;
+        border-top: 1rem solid #3498db;
+        margin: 1rem auto;
+        width: 5rem;
+        height: 5rem;
+    } 
+    .prepare-button{
+        font-size: 1rem;
+        margin: 1rem auto;
+        padding: 1rem;
+        border-radius: 1rem;
+    }
+    .popup-preparing-text{
+        font-size: 1rem;
+        margin: 1rem auto;
+    }
+    .popup-response-text{
+        font-size: 1rem;
+        margin: 1rem auto;
+    }
+    .popup-button{
+        font-size: 1rem;
+        padding: 1rem;
+        border-radius: 1rem;
+        margin: 1rem auto;
+    }
+}
+
+@media(max-width:800px){
+    .heading{
+        font-size: 1.2rem;
+        padding: 1rem;
+        margin: 1rem;
+    }
+    .pdfs{
+        padding: 1rem;
+    }
+    .pdfs-header{
+        font-size: 1rem;
+    }
+    .pdf-upload{
+        margin: 1rem;
+        padding: 1rem;
+        border-radius: 1rem;
+        width: 95%;
+    }
+    .pdf-upload-icon{
+        font-size: 5rem;
+    }
+    #pdf-description{
+        margin-bottom: 1rem;
+        border-radius: 1rem;
+        font-size: 0.7rem;
+        padding: 1rem;
+    }
+    #upload-pdf{
+        font-size: 1rem;
+        padding: 1rem;
+        border-radius: 1rem;
+    }
+    .pdf-selected-files{
+        margin: 1rem;
+        font-size: 1rem;
+    }
+    .pdfs-list-header{
+        font-size: 1rem;
+    }
+    .pdfs-list{
+        margin: 1rem;
+    }
+    .pdf{
+        width: 95%;
+        font-size: 0.8rem;
+        margin: 1rem;
+        padding: 1rem;
+        border-radius: 1rem;
+    }
+    .pdf i{
+        font-size: 5rem;
+    }
+    .no-pdf-files{
+        font-size: 1rem;
+        margin: 1rem;
+    }
+
+    .csvs{
+        padding: 1rem;
+    }
+    .csvs-header{
+        font-size: 1rem;
+    }
+    .csv-upload{
+        margin: 1rem;
+        padding: 1rem;
+        border-radius: 1rem;
+        width: 95%;
+    }
+    .csv-upload-icon{
+        font-size: 5rem;
+    }
+    #csv-description{
+        margin-bottom: 1rem;
+        border-radius: 1rem;
+        font-size: 0.7rem;
+        padding: 1rem;
+    }
+    #upload-csv{
+        font-size: 1rem;
+        padding: 1rem;
+        border-radius: 1rem;
+    }
+    .csv-selected-files{
+        margin: 1rem;
+        font-size: 1rem;
+    }
+    .csvs-list-header{
+        font-size: 1rem;
+    }
+    .csvs-list{
+        margin: 1rem;
+    }
+    .csv{
+        width: 95%;
+        font-size: 0.8rem;
+        margin: 1rem;
+        padding: 1rem;
+        border-radius: 1rem;
+    }
+    .csv i{
+        font-size: 5rem;
+    }
+    .no-csv-files{
+        font-size: 1rem;
+        margin: 1rem;
+    }
+
+    .dbs{
+        padding: 1rem;
+    }
+    .dbs-header{
+        font-size: 1rem;
+    }
+    .db-upload{
+        margin: 1rem;
+        padding: 1rem;
+        border-radius: 1rem;
+        width: 95%;
+    }
+    .db-upload-icon{
+        font-size: 5rem;
+    }
+    #db-description{
+        margin-bottom: 1rem;
+        border-radius: 1rem;
+        font-size: 0.7rem;
+        padding: 1rem;
+    }
+    #upload-db{
+        font-size: 1rem;
+        padding: 1rem;
+        border-radius: 1rem;
+    }
+    .db-selected-files{
+        margin: 1rem;
+        font-size: 1rem;
+    }
+    .dbs-list-header{
+        font-size: 1rem;
+    }
+    .dbs-list{
+        margin: 1rem;
+    }
+    .db{
+        width: 95%;
+        font-size: 0.8rem;
+        margin: 1rem;
+        padding: 1rem;
+        border-radius: 1rem;
+    }
+    .db i{
+        font-size: 5rem;
+    }
+    .no-db-files{
+        font-size: 1rem;
+        margin: 1rem;
+    }
+
+    .loader {
+        border: 1rem solid #f3f3f3;
+        border-radius: 50%;
+        border-top: 1rem solid #3498db;
+        margin: 1rem auto;
+        width: 5rem;
+        height: 5rem;
+    } 
+    .prepare-button{
+        font-size: 1rem;
+        margin: 1rem auto;
+        padding: 1rem;
+        border-radius: 1rem;
+    }
+    .popup-preparing-text{
+        font-size: 1rem;
+        margin: 1rem auto;
+    }
+    .popup-response-text{
+        font-size: 1rem;
+        margin: 1rem auto;
+    }
+    .popup-button{
+        font-size: 1rem;
+        padding: 1rem;
+        border-radius: 1rem;
+        margin: 1rem auto;
+    }
 }
