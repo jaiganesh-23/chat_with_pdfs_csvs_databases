@@ -23,6 +23,9 @@ view = Blueprint("views", __name__)
 final_graphs = {}
 final_graphs_last_active = {}
 thread_id = 999
+pdf_file = 0
+csv_file = 0
+db_file = 0
 
 def clear_final_graphs():
     global final_graphs
@@ -46,67 +49,91 @@ def chat():
 
 @view.route("/upload_pdf", methods=["POST"])
 def upload_pdf():
+    global pdf_file
     if 'files[]' not in request.files:
         resp = jsonify({'message' : 'No file part in the request'})
         resp.status_code = 400 
         return resp
     
     if "files" not in session:
-        session["files"] = [json.loads(request.form.get("file"))]
+        file_dict = json.loads(request.form.get("file"))
+        file_dict["fileName"] = "pdf_file"+str(pdf_file)+".pdf"
+        session["files"] = [file_dict]
     else:
+        file_dict = json.loads(request.form.get("file"))
+        file_dict["fileName"] = "pdf_file"+str(pdf_file)+".pdf"
         temp = session["files"]
-        temp.append(json.loads(request.form.get("file")))
+        temp.append(file_dict)
         session["files"] = temp
 
     files = request.files.getlist('files[]')
     for file in files:
         filename = secure_filename(file.filename)
-        file_path = os.path.join(here("downloads/pdfs"), filename)
+        new_filename = "pdf_file"+str(pdf_file)+".pdf"
+        file_path = os.path.join(here("downloads/pdfs"), new_filename)
         file.save(file_path)
  
+    pdf_file = pdf_file + 1
+
     return jsonify({"message": "PDF file uploaded successfully."}), 200
 
 @view.route("/upload_csv", methods=["POST"])
 def upload_csv():
+    global csv_file
     if 'files[]' not in request.files:
         resp = jsonify({'message' : 'No file part in the request'})
         resp.status_code = 400 
         return resp
     
     if "files" not in session:
-        session["files"] = [json.loads(request.form.get("file"))]
+        file_dict = json.loads(request.form.get("file"))
+        file_dict["fileName"] = "csv_file"+str(csv_file)+"."+file_dict["oldFileName"].split(".")[-1]
+        session["files"] = [file_dict]
     else:
+        file_dict = json.loads(request.form.get("file"))
+        file_dict["fileName"] = "csv_file"+str(csv_file)+"."+file_dict["oldFileName"].split(".")[-1]
         temp = session["files"]
-        temp.append(json.loads(request.form.get("file")))
+        temp.append(file_dict)
         session["files"] = temp
 
     files = request.files.getlist('files[]')
     for file in files:
         filename = secure_filename(file.filename)
-        file_path = os.path.join(here("downloads/csvs xlsxs"), filename)
+        new_filename = "csv_file"+str(csv_file)+"."+filename.split(".")[-1]
+        file_path = os.path.join(here("downloads/csvs xlsxs"), new_filename)
         file.save(file_path)
+
+    csv_file = csv_file + 1
  
     return jsonify({"message": "CSV file uploaded successfully."}), 200
 
 @view.route("/upload_db", methods=["POST"])
 def upload_db():
+    global db_file
     if 'files[]' not in request.files:
         resp = jsonify({'message' : 'No file part in the request'})
         resp.status_code = 400 
         return resp
     
     if "files" not in session:
-        session["files"] = [json.loads(request.form.get("file"))]
+        file_dict = json.loads(request.form.get("file"))
+        file_dict["fileName"] = "db_file"+str(db_file)+"."+file_dict["oldFileName"].split(".")[-1]
+        session["files"] = [file_dict]
     else:
+        file_dict = json.loads(request.form.get("file"))
+        file_dict["fileName"] = "db_file"+str(db_file)+"."+file_dict["oldFileName"].split(".")[-1]
         temp = session["files"]
-        temp.append(json.loads(request.form.get("file")))
+        temp.append(file_dict)
         session["files"] = temp
 
     files = request.files.getlist('files[]')
     for file in files:
         filename = secure_filename(file.filename)
-        file_path = os.path.join(here("downloads/dbs"), filename)
+        new_filename = "db_file"+str(db_file)+"."+filename.split(".")[-1]
+        file_path = os.path.join(here("downloads/dbs"), new_filename)
         file.save(file_path)
+
+    db_file = db_file + 1
  
     return jsonify({"message": "DB file uploaded successfully."}), 200
 
@@ -145,9 +172,9 @@ from pyprojroot import here
 question="question"
 @tool
 def tool"""+f"""{index}"""+f"""(query: str) -> str:
-    "Query the {file["fileName"]} database. {file["fileDescription"]}. Input should be search query in natural language."
+    "Query the {file["oldFileName"]} database. {file["fileDescription"]}. Input should be search query in natural language."
     agent = InitSQLTool(
-            sqldb_dir=here(f"downloads/dbs/{file["fileName"]}")
+            sqldb_dir=here(f"downloads/dbs/{file['fileName']}")
         )
     sql_query = agent.sql_query_chain.invoke({"{question: query}"})
     return agent.db.run(sql_query)
@@ -176,10 +203,10 @@ from pyprojroot import here
 
 @tool
 def tool"""+f"""{index}"""+f"""(query: str) -> str:
-    "Query the {file["fileName"]} file. {file["fileDescription"]}"
+    "Query the {file["oldFileName"]} file. {file["fileDescription"]}"
     rag_tool = InitRAGTool(
         embedding_model="mistral-embed",
-        vectordb_dir=here(f"vectordbs/{file["fileName"]}"),
+        vectordb_dir=here(f"vectordbs/{file['fileName']}"),
         k=2,
         collection_name=f"{file['fileName']}-chroma"
     )
@@ -194,7 +221,7 @@ def tool"""+f"""{index}"""+f"""(query: str) -> str:
 
         if file["fileType"] == "csv/xlsx":
             filename_without_extension = file["fileName"].split(".")[0]
-            file_extension = file["fileName"].split(".")[1]
+            file_extension = file["fileName"].split(".")[-1]
             if file_extension == "csv":
                 db_path = here(f"downloads/csvs xlsxs dbs/{filename_without_extension}.db")
                 sqlite_db_path = f"sqlite:///{db_path}"

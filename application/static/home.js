@@ -4,7 +4,6 @@ menu_icon.addEventListener("click", async function () {
     let sidebar = document.querySelector(".sidebar");
     let content = document.querySelector(".content");
     sidebar.classList.toggle("open");
-    console.log(content);
     content.classList.toggle("open");
     menu_icon.classList.toggle('bx-menu');
     menu_icon.classList.toggle('bx-x');
@@ -36,7 +35,7 @@ async function getfiles(){
             let icon = document.createElement("i");
             icon.classList.add("bx", "bxs-file-blank", "pdf-icon");
             let p1 = document.createElement("p");
-            p1.textContent = "File: " + file.fileName;
+            p1.textContent = "File: " + file.oldFileName;
             let p2 = document.createElement("p");   
             p2.textContent = "File Description: " + file.fileDescription;
             new_div.appendChild(icon);
@@ -52,7 +51,7 @@ async function getfiles(){
             let icon = document.createElement("i");
             icon.classList.add("bx", "bxs-file-blank", "csv-icon");
             let p1 = document.createElement("p");
-            p1.textContent = "File: " + file.fileName;
+            p1.textContent = "File: " + file.oldFileName;
             let p2 = document.createElement("p");   
             p2.textContent = "File Description: " + file.fileDescription;
             new_div.appendChild(icon);
@@ -68,7 +67,7 @@ async function getfiles(){
             let icon = document.createElement("i");
             icon.classList.add("bx", "bxs-file-blank", "db-icon");
             let p1 = document.createElement("p");
-            p1.textContent = "File: " + file.fileName;
+            p1.textContent = "File: " + file.oldFileName;
             let p2 = document.createElement("p");   
             p2.textContent = "File Description: " + file.fileDescription;
             new_div.appendChild(icon);
@@ -141,7 +140,7 @@ pdf_input.addEventListener("change", function(e) {
 });
 pdf_button.addEventListener("click", function (e) {
     e.preventDefault();
-    let file = {"fileName": pdf_input.files[0].name, "fileDescription": pdf_description.value, "fileType": "pdf"};
+    let file = {"fileName": pdf_input.files[0].name, "fileDescription": pdf_description.value, "fileType": "pdf", "oldFileName": pdf_input.files[0].name};
     console.log(file);
 
     if(uploaded_pdfs.length == 0){
@@ -216,7 +215,7 @@ csv_input.addEventListener("change", function(e) {
 });
 csv_button.addEventListener("click", function (e) {
     e.preventDefault();
-    let file = {"fileName": csv_input.files[0].name, "fileDescription": csv_description.value, "fileType": "csv/xlsx"};
+    let file = {"fileName": csv_input.files[0].name, "fileDescription": csv_description.value, "fileType": "csv/xlsx", "oldFileName": csv_input.files[0].name};
     console.log(file);
 
     if(uploaded_csvs.length == 0){
@@ -291,7 +290,7 @@ db_input.addEventListener("change", function(e) {
 });
 db_button.addEventListener("click", function (e) {
     e.preventDefault();
-    let file = {"fileName": db_input.files[0].name, "fileDescription": db_description.value, "fileType": "db"};
+    let file = {"fileName": db_input.files[0].name, "fileDescription": db_description.value, "fileType": "db", "oldFileName": db_input.files[0].name};
     console.log(file);
 
     if(uploaded_dbs.length == 0){

@@ -50,7 +50,6 @@
 }
 
 #send-button{
-    width: 25%;
     padding: 20px;
     border-radius: 20px;
     background: white;
@@ -131,7 +130,6 @@
         border-radius: 1rem;
     }
     #send-button{
-        width: 25%;
         font-size: 1rem;
         padding: 1rem;
         margin: 1rem;
@@ -185,7 +183,6 @@
         border-radius: 1rem;
     }
     #send-button{
-        width: 25%;
         font-size: 0.6rem;
         padding: 0.6rem;
         margin: 0.6rem;
