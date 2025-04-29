@@ -12,6 +12,7 @@ from langgraph.checkpoint.memory import MemorySaver
 from langgraph.graph import StateGraph, START
 from langchain_core.tools import tool
 from langchain_mistralai import ChatMistralAI
+from langchain_groq import ChatGroq
 from langsmith import traceable
 import time
 import pandas as pd
@@ -203,7 +204,7 @@ from pyprojroot import here
 
 @tool
 def tool"""+f"""{index}"""+f"""(query: str) -> str:
-    "Query the {file["oldFileName"]} file. {file["fileDescription"]}"
+    "Query the {file["oldFileName"]} file. {file["fileDescription"]}. Input should be search query in natural language."
     rag_tool = InitRAGTool(
         embedding_model="mistral-embed",
         vectordb_dir=here(f"vectordbs/{file['fileName']}"),
@@ -254,7 +255,7 @@ def tool"""+f"""{index}"""+f"""(query: str) -> str:
             exec(code, code_namespace)
             agent_tools.append(code_namespace["tool"+f"{index}"])
 
-    primary_llm = ChatMistralAI(model="mistral-large-latest", temperature=0, api_key=os.getenv("MISTRALAI_API_KEY"))
+    primary_llm = ChatGroq(model="meta-llama/llama-4-scout-17b-16e-instruct", temperature=0)
     graph_builder = StateGraph(State)
     primary_llm_with_tools = primary_llm.bind_tools(tools=agent_tools)
 

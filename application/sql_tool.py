@@ -10,7 +10,7 @@ from langchain_mistralai import ChatMistralAI
 class InitSQLTool:
 
     def __init__(self, sqldb_dir: str) -> None:
-        self.sql_agent_llm = ChatGroq(model="llama-3.3-70b-versatile", temperature=0)
+        self.sql_agent_llm = ChatGroq(model="meta-llama/llama-4-scout-17b-16e-instruct", temperature=0)
         self.db = SQLDatabase.from_uri(f"sqlite:///{sqldb_dir}")
         self.sql_query_template = """
             You are a data analyst at a company. You are interacting with a user who is asking you questions about the company's database.
