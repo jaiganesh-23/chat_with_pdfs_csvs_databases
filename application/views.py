@@ -187,8 +187,8 @@ def tool"""+f"""{index}"""+f"""(query: str) -> str:
         if file["fileType"] == "pdf":
             preparedb_instance = PrepareVectorDB(
                 doc_dir=here(f"downloads/pdfs/{file['fileName']}"),
-                chunk_size=50,
-                chunk_overlap=10,
+                chunk_size=500,
+                chunk_overlap=100,
                 embedding_model="mistral-embed",
                 vectordb_dir=here(f"vectordbs/{file['fileName']}"),
                 collection_name=f"{file['fileName']}-chroma",
@@ -208,10 +208,10 @@ def tool"""+f"""{index}"""+f"""(query: str) -> str:
     rag_tool = InitRAGTool(
         embedding_model="mistral-embed",
         vectordb_dir=here(f"vectordbs/{file['fileName']}"),
-        k=20,
+        k=2,
         collection_name=f"{file['fileName']}-chroma"
     )
-    docs = rag_tool.vectordb.similarity_search(query, k=20)
+    docs = rag_tool.vectordb.similarity_search(query, k=2)
     return "\\n\\n".join([doc.page_content for doc in docs])
 """
             code = compile(func_string, "<string>","exec")
