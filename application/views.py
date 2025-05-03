@@ -208,10 +208,10 @@ def tool"""+f"""{index}"""+f"""(query: str) -> str:
     rag_tool = InitRAGTool(
         embedding_model="mistral-embed",
         vectordb_dir=here(f"vectordbs/{file['fileName']}"),
-        k=2,
+        k=5,
         collection_name=f"{file['fileName']}-chroma"
     )
-    docs = rag_tool.vectordb.similarity_search(query, k=2)
+    docs = rag_tool.vectordb.similarity_search(query, k=5)
     return "\\n\\n".join([doc.page_content for doc in docs])
 """
             code = compile(func_string, "<string>","exec")
