@@ -9,7 +9,7 @@ from .rag_tool import InitRAGTool, PrepareVectorDB
 from .agent_backend import State, BasicToolNode, route_tools, plot_agent_schema
 from pyprojroot import here
 from langgraph.checkpoint.memory import MemorySaver
-from langgraph.graph import StateGraph, START
+from langgraph.graph import StateGraph, START, MessagesState
 from langchain_core.tools import tool
 from langchain_mistralai import ChatMistralAI
 from langchain_groq import ChatGroq
@@ -18,6 +18,21 @@ import time
 import pandas as pd
 from sqlalchemy import create_engine, inspect
 import uuid
+from langchain_core.prompts import ChatPromptTemplate, MessagesPlaceholder
+
+prompt_template = ChatPromptTemplate.from_messages(
+    [
+        (
+            "system",
+            """Dont forget Spaces in table name values and underscores in column values while calling the tools. For Example, if the 
+            user message is to find mrp of F HIMALAYAN SPRING VOL 1 collection name AJAX design then the generated query should be
+            'what is the mrp of F HIMALAYAN SPRING VOL 1 collection name and AJAX design' and not
+            'what is the mrp of F HIMALAYAN SPRING VOL1 collection name and AJAX design'. 
+            Be detailed with column details when giving query to tools."""
+        ),
+        MessagesPlaceholder(variable_name="messages"),
+    ]
+)
 
 
 view = Blueprint("views", __name__)
@@ -245,9 +260,10 @@ from pyprojroot import here
 question="question"
 @tool
 def tool"""+f"""{index}"""+f"""(query: str) -> str:
-    "Query the {filename_without_extension} database. {file["fileDescription"]}. Input should be search query in natural language."
+    "Query the {filename_without_extension} database. {file["fileDescription"]}. Input should be search query in natural language. Beware of spaces and underscores in table names."
     agent = InitSQLTool(sqldb_dir=here(f"downloads/csvs xlsxs dbs/{filename_without_extension}.db"))
     sql_query = agent.sql_query_chain.invoke({"{question: query}"})
+    print(sql_query)
     return agent.db.run(sql_query)
 """
             code = compile(func_string, "<string>", "exec")
@@ -263,13 +279,14 @@ def tool"""+f"""{index}"""+f"""(query: str) -> str:
         """Executes the primary language model with tools bound and returns the generated message."""
         try:
             # Attempt to invoke the primary LLM with tools
+            prompt = prompt_template.invoke(state)
             return {"messages": [primary_llm_with_tools.invoke(state["messages"])]}
         except Exception as e:
             print(e)
             # Handle errors and return a user-friendly message
             error_message = f"An unexpected error occurred while processing your request, please try again later."
             return {"messages": [("assistant", error_message)]}
-        
+
     graph_builder.add_node("chatbot", chatbot)
     tool_node = BasicToolNode(tools=agent_tools)
     graph_builder.add_node("tools", tool_node)
